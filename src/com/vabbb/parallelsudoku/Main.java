@@ -5,7 +5,7 @@ public class Main {
 		if (args.length < 1 || args.length > 1){
 			printUsage();
 		}
-		return;
+
 	}
 
 	private static void printUsage() {

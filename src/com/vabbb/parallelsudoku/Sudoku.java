@@ -4,12 +4,12 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Sudoku {
+class Sudoku {
 	private final static int DIM = 9;
 
 	private Cell[][] sudoku;
 
-	public Sudoku(File file) throws Exception {
+	Sudoku(File file) throws Exception {
 		// Crea la matrice di celle
 		this.sudoku = new Cell[DIM][DIM];
 		for (int i = 0; i<DIM; i++)
@@ -35,7 +35,7 @@ public class Sudoku {
 		}
 	}
 
-	public void prettyPrint(){
+	void prettyPrint(){
 		System.out.print("+-----------------------------+\n");
 		for (int i = 0; i < DIM; i++) {
 			System.out.print("|");

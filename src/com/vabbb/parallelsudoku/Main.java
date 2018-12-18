@@ -2,7 +2,7 @@ package com.vabbb.parallelsudoku;
 
 public class Main {
 	public static void main(String[] args){
-		if (args.length < 1 || args.length > 1){
+		if (args.length != 1){
 			printUsage();
 		}
 

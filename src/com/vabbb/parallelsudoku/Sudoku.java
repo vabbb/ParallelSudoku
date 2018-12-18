@@ -9,10 +9,6 @@ public class Sudoku {
 
 	private Cell[][] sudoku;
 
-	public Sudoku(){
-		this.sudoku = null;
-	}
-
 	public Sudoku(File file) throws Exception {
 		// Crea la matrice di celle
 		this.sudoku = new Cell[DIM][DIM];

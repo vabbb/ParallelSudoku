@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="parallelsudoku:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/parallelsudoku_jar</output-path>
-    <root id="archive" name="parallelsudoku.jar">
-      <element id="module-output" name="parallelsudoku" />
-    </root>
-  </artifact>
-</component>

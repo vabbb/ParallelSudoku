@@ -8,10 +8,11 @@ import java.util.List;
 class Sudoku {
 	private final static int DIM = 9;
 	private final static int BOXDIM = 3;
+	final static int totalCells = DIM*DIM;
 
 	private Cell[][] sudoku;
 
-	Sudoku(File file) throws Exception {
+	Sudoku(File file) throws IOException {
 		// Create matrix of cells
 		this.sudoku = new Cell[DIM][DIM];
 		for (int i = 0; i<DIM; i++)
@@ -80,15 +81,13 @@ class Sudoku {
 	BigInteger computeSearchSpace(){
 		BigInteger r = BigInteger.valueOf(1);
 		int i, j;
-		for (i = 0; i < DIM; i++) {
+		for (i = 0; i < DIM; i++)
 			for (j = 0; j < DIM; j++) {
 				if (!this.sudoku[i][j].isFixed) {
-					BigInteger.valueOf(computeCandidates(i, j));
-					r = r.multiply(BigInteger.valueOf(sudoku[i][j].howManyCandidates()));
+					// computeCandidates returns the number of candidates for that cell.. How convenient!
+					r = r.multiply(BigInteger.valueOf(computeCandidates(i, j)));
 				}
-				//System.out.println("current r:" + r);
 			}
-		}
 		return r;
 	}
 
@@ -100,6 +99,15 @@ class Sudoku {
 				r++;
 			}
 		}
+		return r;
+	}
+
+	int computeEmptyCells(){
+		int i, j, r = 0;
+		for (i = 0; i < DIM; i++)
+			for (j = 0; j < DIM; j++)
+				if (sudoku[i][j].getValue() == 0)
+					r++;
 		return r;
 	}
 }

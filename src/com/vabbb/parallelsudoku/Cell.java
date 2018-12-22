@@ -22,6 +22,7 @@ class Cell {
 	}
 
 	void setValue(char value){
+		// ASCII magic!
 		if('1' <= value && value <= '9') {
 			this.isFixed = true;
 			this.value = Character.getNumericValue(value);
@@ -34,10 +35,10 @@ class Cell {
 	void removeCandidate(int candidate){
 		this.candidates.remove(candidate);
 	}
-	int howManyCandidates(){
-		if (this.isFixed) return 1;
-		return this.candidates.size();
-	}
+//	int howManyCandidates(){
+//		if (this.isFixed) return 1;
+//		return this.candidates.size();
+//	}
 	int getValue() {
 		return this.value;
 	}

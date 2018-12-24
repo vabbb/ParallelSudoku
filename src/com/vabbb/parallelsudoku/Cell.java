@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 class Cell {
-	private Set<Integer> candidates;
+	//private Set<Integer> candidates;
 	boolean isFixed = false;
 	private int value;
 	private int x;
@@ -13,7 +13,7 @@ class Cell {
 	Cell(int x, int y){
 		this.x = x;
 		this.y = y;
-		this.candidates = new HashSet<>();
+//		this.candidates = new HashSet<>();
 	}
 
 	void setValue(int value){
@@ -29,12 +29,12 @@ class Cell {
 		} else this.value = 0;
 	}
 
-	void addCandidate(int candidate){
-		this.candidates.add(candidate);
-	}
-	void removeCandidate(int candidate){
-		this.candidates.remove(candidate);
-	}
+//	void addCandidate(int candidate){
+//		this.candidates.add(candidate);
+//	}
+//	void removeCandidate(int candidate){
+//		this.candidates.remove(candidate);
+//	}
 //	int howManyCandidates(){
 //		if (this.isFixed) return 1;
 //		return this.candidates.size();

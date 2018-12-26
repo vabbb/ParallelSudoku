@@ -17,7 +17,7 @@ import java.util.concurrent.ForkJoinPool;
 public class Main {
 	public static void main(String[] args) throws IOException {
 		long startTime, endTime;
-		String cutoff_string = "1E10";
+		String cutoff_string = "1E30";
 
 		if (args.length == 2)
 			cutoff_string = args[1];

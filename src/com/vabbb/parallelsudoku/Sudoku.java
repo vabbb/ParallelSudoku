@@ -15,7 +15,6 @@ class Sudoku {
 
 	private class Cell {
 		int value;
-		boolean fixed = false;
 
 		void setValue(int value){
 			this.value = value;
@@ -24,12 +23,9 @@ class Sudoku {
 		void setValue(char value){
 			// ASCII magic!
 			if('1' <= value && value <= '9') {
-				this.fixed = true;
 				this.value = Character.getNumericValue(value);
 			} else this.value = 0;
 		}
-
-		boolean isFixed() { return fixed; }
 
 		int getValue() { return this.value; }
 	}
@@ -113,10 +109,6 @@ class Sudoku {
 		sudoku[i][j].setValue(0);
 	}
 
-	private boolean isFixed(int i, int j){
-		return sudoku[i][j].isFixed();
-	}
-
 	void prettyPrint() {
 		System.out.println("+-----------------------------+");
 		for (int i = 0; i < DIM; i++) {
@@ -140,7 +132,7 @@ class Sudoku {
 		BigInteger r = BigInteger.ONE;
 		for (int i = 0; i < DIM; i++)
 			for (int j = 0; j < DIM; j++)
-				if (!isFixed(i, j))
+				if (getValue(i, j) == 0)
 		// computeCandidates returns the number of candidates for that cell
 					r = r.multiply(computeCandidates(i, j));
 		return r;

@@ -51,9 +51,8 @@ class Sudoku {
 		BufferedReader br = new BufferedReader(new FileReader(file));
 		String str;
 		sudokuString = new ArrayList<>();
-		while ((str = br.readLine()) != null && str.length() != 0) {
+		while ((str = br.readLine()) != null && str.length() != 0)
 			sudokuString.add(str);
-		}
 
 		constructorHelper();
 	}
@@ -61,7 +60,6 @@ class Sudoku {
 	// I need this to make clones of the original sudoku that I read from the file
 	Sudoku(List<String> ss) {
 		sudokuString = ss;
-
 		constructorHelper();
 	}
 
@@ -165,27 +163,27 @@ class Sudoku {
 		return r;
 	}
 
-	int seqSolve() {
-		return seqSolve(0, 0);
+	int seqSolver() {
+		return seqSolver(0, 0);
 	}
 
 	// solver with backtracking algorithm
-	int seqSolve(int i, int j){
+	int seqSolver(int i, int j){
 		int r = 0;
 
-		if (i == DIM) {				// if we got to the end of the line
-			i = 0;				// go to the first cell of the line
-			if (++j == DIM)			// and then to the next line; if next line is above the limit
+		if (i == DIM) {				// if we got to the end of the column
+			i = 0;				// go to the first cell of the column
+			if (++j == DIM)			// and then to the next column; if next column is above the limit
 				return 1;		// then we got a new solution
 		}
 
 		if(getValue(i, j) != 0)				// skip filled cells
-			return seqSolve(i+1, j);		// recursive call to the next cell
+			return seqSolver(i+1, j);		// recursive call to the next cell
 
-		for(int val = 1; val <= 9; val++){		// cycle through all possible values
+		for(int val = 1; val <= 9; val++) {		// cycle through all possible values
 			if(isLegal(i, j, val)){			// if val is legal
 				setValue(i, j, val);		// then set val as the cell's value
-				r += seqSolve(i+1, j);	// add additional solutions
+				r += seqSolver(i+1, j);	// add additional solutions
 			}
 		}
 		reset(i, j);		// and reset on backtrack

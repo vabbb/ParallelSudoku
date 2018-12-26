@@ -61,7 +61,7 @@ public class Main {
 		System.out.println("+++ SEQUENTIAL SOLVER");
 		Sudoku seqSudoku= new Sudoku(sudoku.getSudokuString());
 		startTime = System.currentTimeMillis();
-		int seqSolutions = seqSudoku.seqSolve();
+		int seqSolutions = seqSudoku.seqSolver();
 		endTime = System.currentTimeMillis();
 		long sequentialTime = endTime-startTime;
 		System.out.printf("Wallclock time w/ sequential alg:%8d ms\n", sequentialTime);

@@ -26,7 +26,8 @@ class ParallelSolver extends RecursiveTask<Integer> {
 	@Override
 	protected Integer compute() {
 		if (searchSpace.compareTo(cutoff) < 0)
-			return soodoku.seqSolve(i, j);
+			return soodoku.seqSolver(i, j);
+		int r = 0;
 
 		List<ParallelSolver> tasks = new ArrayList<>();
 
@@ -45,32 +46,30 @@ class ParallelSolver extends RecursiveTask<Integer> {
 				ParallelSolver recursiveTask =
 						new ParallelSolver (
 								i + 1, j,
-								cloneCurrentSudoku(soodoku),
+								cloneSudoku(soodoku),
 								soodoku.computeSearchSpace(), cutoff
 						);
 				tasks.add(recursiveTask);
 			}
 		}
-		// Si puo` togliere?!?!
-		//soodoku.reset(i, j);
 
 		// Removing a task from the arraylist to run it on the main thread
 		// shortens the wallclock time by ~10%
-		ParallelSolver threadHalving = tasks.remove(0);
+		if (tasks.size() > 0) {
+			ParallelSolver threadHalving = tasks.remove(0);
 
-		for (ParallelSolver t : tasks)
-			t.fork();
+			for (ParallelSolver t : tasks)
+				t.fork();
 
-		int r = threadHalving.compute();
+			r += threadHalving.compute();
 
-		for (ParallelSolver t : tasks)
-			r += t.join();
-
+			for (ParallelSolver t : tasks)
+				r += t.join();
+		}
 		return r;
-
 	}
 
-	private Sudoku cloneCurrentSudoku(Sudoku original) {
+	private Sudoku cloneSudoku(Sudoku original) {
 		int[][] r = new int[Sudoku.DIM][Sudoku.DIM];
 		for (int i = 0; i < Sudoku.DIM; i++)
 			for (int j = 0; j < Sudoku.DIM; j++)

@@ -66,7 +66,7 @@ class Sudoku {
 	}
 
 	Sudoku(int[][] arr) {
-		// Create matrix of cells
+		// Create matrix of cells and fill it with arr's values
 		sudoku = new Cell[DIM][DIM];
 		for (int i = 0; i < DIM; i++)
 			for (int j = 0; j < DIM; j++) {
@@ -111,7 +111,7 @@ class Sudoku {
 		return sudoku[i][j].getValue();
 	}
 
-	void reset(int i, int j){
+	private void reset(int i, int j){
 		sudoku[i][j].setValue(0);
 	}
 
@@ -120,13 +120,12 @@ class Sudoku {
 	}
 
 	void prettyPrint() {
-		int i, j;
 		System.out.println("+-----------------------------+");
-		for (i = 0; i < DIM; i++) {
+		for (int i = 0; i < DIM; i++) {
 			System.out.print("|");
 			if (i % 3 == 0 && i > 0)
 				System.out.print("---------+---------+---------|\n|");
-			for (j = 0; j < DIM; j++) {
+			for (int j = 0; j < DIM; j++) {
 				if (j % BOXDIM == 0 && j > 0)
 					System.out.print("|");
 				int val = getValue(i, j);
@@ -136,29 +135,24 @@ class Sudoku {
 			}
 			System.out.print("|\n");
 		}
-		System.out.println("+-----------------------------+");
+		System.out.println("+-----------------------------+\n");
 	}
 
 	BigInteger computeSearchSpace() {
-		BigInteger r = BigInteger.valueOf(1);
-		int i, j;
-		for (i = 0; i < DIM; i++)
-			for (j = 0; j < DIM; j++) {
-				if (!isFixed(i, j)) {
+		BigInteger r = BigInteger.ONE;
+		for (int i = 0; i < DIM; i++)
+			for (int j = 0; j < DIM; j++)
+				if (!isFixed(i, j))
 		// computeCandidates returns the number of candidates for that cell
 					r = r.multiply(computeCandidates(i, j));
-				}
-			}
 		return r;
 	}
 
 	private BigInteger computeCandidates(int x, int y) {
 		int r = 0;
-		for (int i = 1; i <= 9; i++) {
-			if (isLegal(x, y, i)) {
+		for (int i = 1; i <= 9; i++)
+			if (isLegal(x, y, i))
 				r++;
-			}
-		}
 		return BigInteger.valueOf(r);
 	}
 
@@ -174,7 +168,6 @@ class Sudoku {
 	int seqSolve() {
 		return seqSolve(0, 0);
 	}
-
 
 	// solver with backtracking algorithm
 	int seqSolve(int i, int j){
@@ -201,7 +194,3 @@ class Sudoku {
 
 	}
 }
-
-
-
-

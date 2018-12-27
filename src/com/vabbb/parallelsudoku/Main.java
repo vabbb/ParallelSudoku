@@ -29,7 +29,7 @@ public class Main {
 		BigInteger cutoff = new BigDecimal(cutoff_string).toBigInteger();
 
 		Sudoku sudoku = new Sudoku(new File(args[0]));
-		//sudoku.prettyPrint();
+		sudoku.prettyPrint();
 
 		BigInteger searchsp = sudoku.computeSearchSpace();
 		NumberFormat scientific_format =
@@ -54,8 +54,8 @@ public class Main {
 				new ParallelSolver(parSudoku, searchsp, cutoff));
 		endTime = System.currentTimeMillis();
 		long parallelTime = endTime-startTime;
-		System.out.printf("Wallclock time w/ parallel alg:  %8d ms\n", parallelTime);
-		System.out.println("Possible solutions: " + parSolutions + "\n");
+		System.out.printf("Tempo dell'alg parallelo:  %8d ms\n", parallelTime);
+		System.out.println("Spazio delle soluzioni: " + parSolutions + "\n");
 
 		// SEQUENTIAL ALGORITHM
 		System.out.println("+++ SEQUENTIAL SOLVER");
@@ -64,8 +64,8 @@ public class Main {
 		int seqSolutions = seqSudoku.seqSolver();
 		endTime = System.currentTimeMillis();
 		long sequentialTime = endTime-startTime;
-		System.out.printf("Wallclock time w/ sequential alg:%8d ms\n", sequentialTime);
-		System.out.println("Possible solutions: " + seqSolutions + "\n");
+		System.out.printf("Tempo dell'alg sequenziale:%8d ms\n", sequentialTime);
+		System.out.println("Spazio delle soluzioni: " + seqSolutions + "\n");
 
 		// CALCULATE SPEEDUP
 		System.out.print("Speedup: ");

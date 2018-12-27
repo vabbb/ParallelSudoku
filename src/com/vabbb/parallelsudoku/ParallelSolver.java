@@ -26,6 +26,7 @@ class ParallelSolver extends RecursiveTask<Integer> {
 	@Override
 	protected Integer compute() {
 		if (searchSpace.compareTo(cutoff) < 0)
+		//if (soodoku.computeEmptyCells() < cutoff.intValue())
 			return soodoku.seqSolver(i, j);
 		int r = 0;
 
@@ -47,6 +48,7 @@ class ParallelSolver extends RecursiveTask<Integer> {
 						new ParallelSolver (
 								i + 1, j,
 								cloneSudoku(soodoku),
+								//BigInteger.ONE, cutoff
 								soodoku.computeSearchSpace(), cutoff
 						);
 				tasks.add(recursiveTask);

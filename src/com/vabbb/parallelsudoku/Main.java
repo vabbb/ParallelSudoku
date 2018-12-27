@@ -29,7 +29,7 @@ public class Main {
 		BigInteger cutoff = new BigDecimal(cutoff_string).toBigInteger();
 
 		Sudoku sudoku = new Sudoku(new File(args[0]));
-		sudoku.prettyPrint();
+		//sudoku.prettyPrint();
 
 		BigInteger searchsp = sudoku.computeSearchSpace();
 		NumberFormat scientific_format =
